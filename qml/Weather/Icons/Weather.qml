@@ -33,6 +33,25 @@ Item {
             getData();
         }
     }
+	    //таймер запускающий обновление погоды один раз
+    Timer {
+        interval: 15000
+        running: true
+        repeat: false
+        onTriggered: {
+            getData();
+        }
+    }
+	
+	    //таймер запускающий обновление погоды один раз
+    Timer {
+        interval: 20000
+        running: true
+        repeat: false
+        onTriggered: {
+            getData();
+        }
+    }
 
     //таймер запускающий обновление погоды каждый час
     Timer {
@@ -202,6 +221,36 @@ Item {
         smooth: true
     }
 
+    BorderImage {
+        id: up
+        property bool on: false
+        signal clicked
+        x: 0
+        y: 0
+        height: 25
+        width: 25
+        source: "update.png"
+        MouseArea {
+            id: mouseArea
+            anchors.fill: parent
+            onClicked: {
+                getData();
+                up.on = true
+            }
+
+        }
+
+        states: State {
+            name: "pressed"; when: mouseArea.pressed == true
+            PropertyChanges { target: shade; opacity: .4 }
+
+        }
+
+        NumberAnimation on rotation {
+            running: up.on; from: 0; to: 360; loops: Animation.Infinite; duration: 1200
+        }
+    }
+
     //отображение текущей темпетаруты
     Row{
         y: 10
@@ -353,6 +402,7 @@ Item {
 
     //получение данных с сервера
     function getData(){
+        up.on = true
         var xhr = new XMLHttpRequest;
         xhr.open("GET",
                  "http://api.worldweatheronline.com/free/v2/weather.ashx?key=" + keyParam + "&q="+
@@ -364,6 +414,8 @@ Item {
             }
         }
         xhr.send();
+
+        up.on = false
     }
 
     //разбор данных полученных с сервера

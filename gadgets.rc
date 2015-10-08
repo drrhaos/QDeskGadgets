@@ -20,7 +20,7 @@ BEGIN
             VALUE "FileDescription", "QDeskGadgets\0"
             VALUE "FileVersion", "0.0.0.1\0"
             VALUE "InternalName", "Гаджеты рабочего стола\0"
-            VALUE "LegalCopyright", "DrHaos 2014\0"
+            VALUE "LegalCopyright", "Haos Soft (C) 2011\0"
             VALUE "OriginalFilename", "QDeskGadgets.exe\0"
             VALUE "ProductName", "Гаджеты рабочего стола\0"
             VALUE "ProductVersion", "0.0.0.1\0"
